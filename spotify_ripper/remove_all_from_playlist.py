@@ -38,7 +38,7 @@ def get_playlist_tracks(username, playlistURI):
     spotInstance.trace = False
 
     print('Getting Results')
-    results = spotInstance.user_playlist(username, rPlaylistID, fields="tracks,next")
+    results = spotInstance.user_playlist(p3, rPlaylistID, fields="tracks,next")
 
     tracks = results['tracks']
 
