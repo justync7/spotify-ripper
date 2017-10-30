@@ -1,6 +1,8 @@
+import spotipy
 import spotipy.util as util
 import spotipy.client
 import os
+from spotipy.oauth2 import SpotifyClientCredentials
 
 redirect_uri = 'http://www.purple.com'
 client_id = ''
