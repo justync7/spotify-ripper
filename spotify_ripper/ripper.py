@@ -251,7 +251,7 @@ class Ripper(threading.Thread):
 
         # create track iterator
         for uri in uris:
-            if self.abort.is_set():spo
+            if self.abort.is_set():
                 break
 
             tracks = list(get_tracks_from_uri(uri))
