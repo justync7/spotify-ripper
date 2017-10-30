@@ -43,6 +43,6 @@ def get_playlist_tracks(username, playlistURI):
     tracks = results['tracks']
     
     while tracks['next']:
-        spotInstance.next(tracks)
+        tracks = spotInstance.next(tracks)
 
     return tracks
