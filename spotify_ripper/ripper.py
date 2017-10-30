@@ -225,8 +225,9 @@ class Ripper(threading.Thread):
 
         # calculate total size and time
         all_tracks = []
+        uri_tracks = list(get_tracks_from_uri(uri))
         for uri in uris:
-            tracks = list(get_tracks_from_uri(uri))
+            tracks = uri_tracks
 
             # TODO: remove dependency on current_album, ...
             for idx, track in enumerate(tracks):
@@ -254,7 +255,7 @@ class Ripper(threading.Thread):
             if self.abort.is_set():
                 break
 
-            tracks = list(get_tracks_from_uri(uri))
+            tracks = uri_tracks
 
             if args.playlist_sync and self.current_playlist:
                 self.sync = Sync(args, self)
