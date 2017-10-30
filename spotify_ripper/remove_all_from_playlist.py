@@ -41,5 +41,8 @@ def get_playlist_tracks(username, playlistURI):
     results = spotInstance.user_playlist(p3, rPlaylistID, fields="tracks,next")
 
     tracks = results['tracks']
+    
+    while tracks['next']:
+        spotInstance.next(tracks)
 
     return tracks
