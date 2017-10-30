@@ -13,6 +13,8 @@ scope = 'playlist-modify-public playlist-modify-private playlist-read-collaborat
 
 token = None
 spotInstance = None
+client_credentials_manager = None
+spotInstanceClient = None
 
 
 def remove_all_from_playlist(username, playlistURI):
@@ -36,13 +38,25 @@ def get_playlist_tracks(username, playlistURI):
     global spotInstance 
     spotInstance = spotipy.Spotify(auth=token)
     spotInstance.trace = False
+    
+    global client_credentials_manager
+    client_credentials_manager = SpotifyClientCredentials()
+    
+    global spotInstanceClient
+    spotInstanceClient = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
     print('Getting Results')
-    results = spotInstance.user_playlist(p3, rPlaylistID, fields="tracks,next")
+    if p3 == username:
+        results = spotInstance.user_playlist(p3, rPlaylistID, fields="tracks,next")
+    else:
+        results = spotInstanceClient.user_playlist(p3, rPlaylistID, fields="tracks,next")
 
     tracks = results['tracks']
     
     while tracks['next']:
-        tracks = spotInstance.next(tracks)
+        if p3 == username:
+          tracks = spotInstance.next(tracks)
+        else:
+          tracks = spotInstanceClient.next(tracks)
 
     return tracks
