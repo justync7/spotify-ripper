@@ -59,10 +59,11 @@ def get_playlist_tracks(username, playlistURI):
     while tracks['next']:
         if p3 == username:
           tracks = spotInstance.next(tracks)
+          items = items + tracks['items']
         else:
           tracks = spotInstanceClient.next(tracks)
-        items = items + tracks['items']
+          items = items + tracks['items']
     
-    print("Got " + str(len(tracks.get('items'))) + " Tracks from " + playlistURI)
+    print("Got " + str(len(items)) + " Tracks from " + playlistURI)
     
     return items
