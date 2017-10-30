@@ -244,6 +244,10 @@ class Ripper(threading.Thread):
             print(
                 "Total Download Size: " +
                 format_size(self.progress.total_size))
+        if self.progress.total_tracks > 0:
+            print(
+                "Total Tracks: " +
+                format_size(self.progress.total_tracks))
 
         # create track iterator
         for uri in uris:
