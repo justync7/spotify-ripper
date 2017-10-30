@@ -251,7 +251,7 @@ class Ripper(threading.Thread):
 
         # create track iterator
         for uri in uris:
-            if self.abort.is_set():
+            if self.abort.is_set():spo
                 break
 
             tracks = list(get_tracks_from_uri(uri))
@@ -433,8 +433,7 @@ class Ripper(threading.Thread):
         elif link.type == spotify.LinkType.PLAYLIST:
             print('get playlist tracks')
             self.playlist_uri = uri
-            tracks = get_playlist_tracks(self.session.user.canonical_name, uri)
-            track_list = tracks.get('items')
+            tracks_list = get_playlist_tracks(self.session.user.canonical_name, uri)
             for n in track_list:
                 thisTrack = n.get('track')
                 thisTrackuri = thisTrack.get('uri')

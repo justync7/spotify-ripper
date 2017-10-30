@@ -23,7 +23,7 @@ def remove_all_from_playlist(username, playlistURI):
     tracks = get_playlist_tracks(username, playlistURI)
 
     track_ids = []
-    for i, item in enumerate(tracks['items']):
+    for i, item in enumerate(tracks):
         track = item['track']
         tid = track['id']
         track_ids.append(tid)
@@ -54,13 +54,15 @@ def get_playlist_tracks(username, playlistURI):
         results = spotInstanceClient.user_playlist(p3, rPlaylistID, fields="tracks,next")
 
     tracks = results['tracks']
+    items = tracks['items']
     
     while tracks['next']:
         if p3 == username:
           tracks = spotInstance.next(tracks)
         else:
           tracks = spotInstanceClient.next(tracks)
+        items = items + tracks['items']
     
     print("Got " + str(len(tracks.get('items'))) + " Tracks from " + playlistURI)
     
-    return tracks
+    return items
