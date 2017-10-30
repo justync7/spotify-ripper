@@ -247,7 +247,7 @@ class Ripper(threading.Thread):
         if self.progress.total_tracks > 0:
             print(
                 "Total Tracks: " +
-                  self.progress.total_tracks)
+                  str(self.progress.total_tracks))
 
         # create track iterator
         for uri in uris:
