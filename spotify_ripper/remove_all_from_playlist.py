@@ -38,9 +38,6 @@ def get_playlist_tracks(username, playlistURI):
     global spotInstance 
     spotInstance = spotipy.Spotify(auth=token)
     spotInstance.trace = False
-    
-    global client_credentials_manager
-    client_credentials_manager = SpotifyClientCredentials()
 
     print('Getting Results')
     results = spotInstance.user_playlist(p3, rPlaylistID, fields="tracks,next")
@@ -49,8 +46,8 @@ def get_playlist_tracks(username, playlistURI):
     items = tracks['items']
     
     while tracks['next']:
-          tracks = spotInstance.next(tracks)
-          items = items + tracks['items']
+        tracks = spotInstance.next(tracks)
+        items = items + tracks['items']
     
     print("Got " + str(len(items)) + " Tracks from " + playlistURI)
     
