@@ -244,12 +244,12 @@ class Ripper(threading.Thread):
 
         if self.progress.total_size > 0:
             print(
-                "Total Download Size: " +
+                "Total Additional Download Size: " +
                 format_size(self.progress.total_size))
         if self.progress.total_tracks > 0:
             print(
                 "Total Tracks: " +
-                  str(self.progress.total_tracks))
+                  str(len(all_tracks)))
 
         # create track iterator
         for uri in uris:
@@ -444,6 +444,7 @@ class Ripper(threading.Thread):
             for i in tracksIter:
                 trackList.append(self.session.get_link(i).as_track())
             print('Loading playlist...')
+            print('Loaded ' + str(len(trackList)) + ' tracks')
             return iter(trackList)
         elif link.type == spotify.LinkType.STARRED:
             link_user = link.as_user()
