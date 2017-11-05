@@ -442,8 +442,12 @@ def is_partial(audio_file, track):
             if _file is not None and _file.info is not None:
                 return _file.info.length
         return None
-
-    audio_file_dur = audio_file_duration(audio_file)
+        
+    try:
+        audio_file_dur = audio_file_duration(audio_file)
+    except mutagen.mp3.HeaderNotFoundError:
+        print("Corrupted mp3:" + audio_file)
+        return false
 
     # for 'weak', give a ~1.5 second wiggle-room
     if (args.partial_check == "strict"):
