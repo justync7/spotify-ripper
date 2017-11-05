@@ -46,8 +46,11 @@ def get_playlist_tracks(username, playlistURI):
     items = tracks['items']
     
     while tracks['next']:
-        tracks = spotInstance.next(tracks)
-        items = items + tracks['items']
+        try:
+            tracks = spotInstance.next(tracks)
+            items = items + tracks['items']
+        except requests.exceptions.ConnectionError:
+            sleep(1)
     
     print("Got " + str(len(items)) + " Tracks from " + playlistURI)
     tracks['items'] = items
