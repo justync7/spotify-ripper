@@ -2,6 +2,7 @@ import spotipy
 import spotipy.util as util
 import spotipy.client
 import os
+from requests.exceptions import ConnectionError
 from spotipy.oauth2 import SpotifyClientCredentials
 
 redirect_uri = 'http://www.purple.com'
@@ -49,7 +50,7 @@ def get_playlist_tracks(username, playlistURI):
         try:
             tracks = spotInstance.next(tracks)
             items = items + tracks['items']
-        except requests.exceptions.ConnectionError:
+        except ConnectionError:
             sleep(1)
     
     print("Got " + str(len(items)) + " Tracks from " + playlistURI)
